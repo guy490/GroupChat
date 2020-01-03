@@ -1,0 +1,12 @@
+.chat-view {
+    display: flex;
+    height: 15em;
+}
+
+.comments {
+    overflow-y: auto;
+}
+
+.segment {
+    margin-top: 0 !important;
+}

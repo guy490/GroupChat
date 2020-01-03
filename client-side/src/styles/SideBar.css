@@ -1,0 +1,26 @@
+.sideBar {
+    list-style-type: none;
+    padding: 0 !important;
+    width: 10em;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.logged-usr {
+    color: blue;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.logged-usr:hover {
+    background: #3ae7d9;
+}
+
+.header {
+    color: white;
+    background: #0818ac;
+    border: none;
+    width: 100%;
+}
