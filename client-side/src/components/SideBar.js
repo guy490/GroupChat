@@ -19,7 +19,7 @@ const SideBar = () => {
 
   return (
     <div className="ui sideBar segment">
-      <button className="header">Current Users:</button>
+      <button className="header">Users in chat:</button>
       {renderUserList()}
     </div>
   );
