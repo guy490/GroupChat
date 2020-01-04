@@ -6,6 +6,10 @@ This project will display a groupchat with google login authntication.
 
 https://guy490.github.io/GroupChat/
 
+## Server Side
+
+The server side of this project is uploaded to Heoku repo and the client side is connected to that repository.
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
