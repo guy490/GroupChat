@@ -1,6 +1,6 @@
 {
     "homepage": "https://guy490.github.io/GroupChat/",
-    "name": "blog",
+    "name": "groupchat",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
