@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/GroupChat/static/css/main.c8a71d63.chunk.css",
-    "main.js": "/GroupChat/static/js/main.c0b50d94.chunk.js",
-    "main.js.map": "/GroupChat/static/js/main.c0b50d94.chunk.js.map",
-    "runtime-main.js": "/GroupChat/static/js/runtime-main.97d952dd.js",
-    "runtime-main.js.map": "/GroupChat/static/js/runtime-main.97d952dd.js.map",
-    "static/js/2.c4bca704.chunk.js": "/GroupChat/static/js/2.c4bca704.chunk.js",
-    "static/js/2.c4bca704.chunk.js.map": "/GroupChat/static/js/2.c4bca704.chunk.js.map",
+    "main.js": "/GroupChat/static/js/main.08f8b7a3.chunk.js",
+    "main.js.map": "/GroupChat/static/js/main.08f8b7a3.chunk.js.map",
+    "runtime-main.js": "/GroupChat/static/js/runtime-main.b9086f56.js",
+    "runtime-main.js.map": "/GroupChat/static/js/runtime-main.b9086f56.js.map",
+    "static/js/2.19699d82.chunk.js": "/GroupChat/static/js/2.19699d82.chunk.js",
+    "static/js/2.19699d82.chunk.js.map": "/GroupChat/static/js/2.19699d82.chunk.js.map",
     "index.html": "/GroupChat/index.html",
-    "precache-manifest.9b5f390293bd5fbbc0c9359362f1f453.js": "/GroupChat/precache-manifest.9b5f390293bd5fbbc0c9359362f1f453.js",
+    "precache-manifest.e5cc091e5a7372e6031252130c1acc9f.js": "/GroupChat/precache-manifest.e5cc091e5a7372e6031252130c1acc9f.js",
     "service-worker.js": "/GroupChat/service-worker.js",
     "static/css/main.c8a71d63.chunk.css.map": "/GroupChat/static/css/main.c8a71d63.chunk.css.map",
-    "static/js/2.c4bca704.chunk.js.LICENSE": "/GroupChat/static/js/2.c4bca704.chunk.js.LICENSE"
+    "static/js/2.19699d82.chunk.js.LICENSE": "/GroupChat/static/js/2.19699d82.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.97d952dd.js",
-    "static/js/2.c4bca704.chunk.js",
+    "static/js/runtime-main.b9086f56.js",
+    "static/js/2.19699d82.chunk.js",
     "static/css/main.c8a71d63.chunk.css",
-    "static/js/main.c0b50d94.chunk.js"
+    "static/js/main.08f8b7a3.chunk.js"
   ]
 }
