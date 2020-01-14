@@ -1,16 +1,14 @@
 import "../styles/SideBar.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { updateUsersList } from "../actions";
 import { socket } from "../client_socket";
 
 const SideBar = ({ userList, updateUsersList }) => {
-  const [userID, setUserID] = useState("");
   useEffect(() => {
     socket.on("userListHasChanged", loggedUsers => {
       console.log(loggedUsers);
       updateUsersList(loggedUsers);
-      setUserID(socket.id);
     });
   }, [updateUsersList]);
 
@@ -19,7 +17,7 @@ const SideBar = ({ userList, updateUsersList }) => {
       return (
         <button key={user.userid} className="logged-usr">
           <span className="youspan">
-            {userID === user.userid ? "You:" : ""}{" "}
+            {socket.id === user.userid ? "You:" : ""}{" "}
           </span>
           Guest {user.username}
         </button>
