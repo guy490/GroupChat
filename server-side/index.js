@@ -1,17 +1,18 @@
+const {
+  addClientToUserList,
+  deleteClientFromUserList,
+  loggedUsers
+} = require("./ListFunctions");
 const io = require("socket.io")();
-let loggedUsers = [];
+
 io.on("connection", client => {
-  let loggedInUserId = client.id;
-  addClientToUserList(loggedInUserId);
+  let userId = client.id;
+  addClientToUserList(userId);
 
   console.log("a user connected");
-
-  console.log(loggedUsers);
-  io.emit("userChangedConnectionStatus", "a GUEST user connected");
-  io.emit("listOfUsersHasChanged", loggedUsers);
+  io.emit("userListHasChanged", loggedUsers);
 
   client.on("subscribeMessage", message => {
-    console.log("The message sent from the client is ", message);
     io.emit("viewMessage", message);
   });
 
@@ -21,27 +22,11 @@ io.on("connection", client => {
 
   client.on("disconnect", () => {
     console.log("user disconnected");
-    deleteClientFromUserList(loggedInUserId);
-    io.emit("listOfUsersHasChanged", loggedUsers);
-    io.emit("userChangedConnectionStatus", "a GUEST user disconnected");
+    deleteClientFromUserList(userId);
+    io.emit("userListHasChanged", loggedUsers);
   });
 });
 
-const addClientToUserList = loggedInUserId => {
-  let username = "";
-  loggedInUserId.split("").forEach((char, ind) => {
-    if (ind % 4 == 0) {
-      username += char;
-    }
-  });
-  loggedUsers.push({ userid: loggedInUserId, username });
-};
-
-const deleteClientFromUserList = loggedInUserId => {
-  let index = loggedUsers.indexOf(loggedInUserId);
-  loggedUsers.splice(index, 1);
-};
-
-const port = process.env.PORT || 8000;
+const port = /*process.env.PORT ||*/ 8000;
 io.listen(port);
 console.log("listening on port ", port);

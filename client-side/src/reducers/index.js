@@ -1,16 +1,27 @@
 import { combineReducers } from "redux";
 
+const INITIAL_STATE = {
+  isSignedIn: null,
+  userId: null
+};
+
 const messageReducer = (state = { messages: [] }, action) => {
-  if (action.type === "RECIEVE_MESSAGE" || action.type === "USER_CONNECTED") {
+  if (action.type === "RECIEVE_MESSAGE") {
     return { ...state, messages: [...state.messages, action.payload] };
   }
   return state;
 };
 
-const INITIAL_STATE = {
-  isSignedIn: null,
-  userId: null
+const connectionReducer = (state = { usersConnectedList: [] }, action) => {
+  if (action.type === "UPDATE_USERS_LIST") {
+    return {
+      ...state,
+      usersConnectedList: [...action.payload]
+    };
+  }
+  return state;
 };
+
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "SIGN_IN":
@@ -23,6 +34,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 };
 
 export default combineReducers({
-  messageReducer: messageReducer,
-  authReducer: authReducer
+  messageReducer,
+  authReducer,
+  connectionReducer
 });

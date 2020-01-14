@@ -1,16 +1,21 @@
 import "../styles/MessageArea.css";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { recieveMessage, userConnected } from "../actions";
+import { recieveMessage } from "../actions";
 import { socket } from "../client_socket";
 import Comment from "./Comment";
 import SideBar from "./SideBar";
 
-const MessageArea = ({ recieveMessage, messages, userConnected }) => {
+const MessageArea = ({ recieveMessage, messages, userList }) => {
   useEffect(() => {
     socket.on("viewMessage", message => recieveMessage(message));
-    socket.on("userChangedConnectionStatus", user => userConnected(user));
-  }, [recieveMessage, userConnected]);
+  }, [recieveMessage]);
+
+  useEffect(() => {
+    // if (userList.length > 0) {
+    //   recieveMessage("a GUEST user connected");
+    // }
+  }, [recieveMessage, userList]);
 
   const renderComments = () => {
     return messages.map((message, ind) => {
@@ -41,9 +46,12 @@ const MessageArea = ({ recieveMessage, messages, userConnected }) => {
 };
 
 const mapStateToProps = state => {
-  return { messages: [...state.messageReducer.messages] };
+  return {
+    messages: [...state.messageReducer.messages],
+    userList: state.connectionReducer.usersConnectedList
+  };
 };
 export default connect(
   mapStateToProps,
-  { recieveMessage, userConnected }
+  { recieveMessage }
 )(MessageArea);

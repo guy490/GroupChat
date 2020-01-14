@@ -24,9 +24,9 @@ export const recieveMessage = message => {
   };
 };
 
-export const userConnected = userDetails => {
+export const updateUsersList = currentUsersList => {
   return {
-    type: "USER_CONNECTED",
-    payload: userDetails
+    type: "UPDATE_USERS_LIST",
+    payload: currentUsersList
   };
 };
