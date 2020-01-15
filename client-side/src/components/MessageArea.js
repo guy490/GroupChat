@@ -35,9 +35,7 @@ const MessageArea = ({ recieveMessage, messages, userList }) => {
   };
   return (
     <div className="ui chat-view">
-      <div>
-        <SideBar />
-      </div>
+      <SideBar />
       <div className="ui fluid comments segment container">
         {renderComments()}
       </div>
