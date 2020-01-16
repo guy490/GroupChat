@@ -1,3 +1,4 @@
+import "../styles/Comment.css";
 import React from "react";
 
 const Comment = props => {

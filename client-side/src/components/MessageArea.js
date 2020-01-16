@@ -11,6 +11,17 @@ const MessageArea = ({ recieveMessage, messages }) => {
     socket.on("viewMessage", message => recieveMessage(message));
   }, [recieveMessage]);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    let scrollingElement = document.querySelector(".comments");
+    if (scrollingElement !== null) {
+      scrollingElement.scrollTop = scrollingElement.scrollHeight;
+    }
+  };
+
   const renderComments = () => {
     return messages.map((message, ind) => {
       if (typeof message === "string") {
