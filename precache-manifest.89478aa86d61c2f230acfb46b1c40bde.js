@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6fc415167770ceec6ced5024a7b184b8",
+    "revision": "dbeaf3b8c92b0bf580894d79dfa61554",
     "url": "/GroupChat/index.html"
   },
   {
-    "revision": "d290bbea1930488c38c8",
+    "revision": "81e57ad9c8d559e7a832",
     "url": "/GroupChat/static/css/main.e55f512c.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/GroupChat/static/js/2.ccb390cc.chunk.js.LICENSE"
   },
   {
-    "revision": "d290bbea1930488c38c8",
-    "url": "/GroupChat/static/js/main.9d896e3e.chunk.js"
+    "revision": "81e57ad9c8d559e7a832",
+    "url": "/GroupChat/static/js/main.1229c5d9.chunk.js"
   },
   {
     "revision": "aee8f5decb5d434bb3b1",
