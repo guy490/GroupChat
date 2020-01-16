@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/GroupChat/static/css/main.27f2699c.chunk.css",
+    "main.css": "/GroupChat/static/css/main.e55f512c.chunk.css",
     "main.js": "/GroupChat/static/js/main.4769dc9c.chunk.js",
     "main.js.map": "/GroupChat/static/js/main.4769dc9c.chunk.js.map",
     "runtime-main.js": "/GroupChat/static/js/runtime-main.b9086f56.js",
@@ -8,15 +8,15 @@
     "static/js/2.36448991.chunk.js": "/GroupChat/static/js/2.36448991.chunk.js",
     "static/js/2.36448991.chunk.js.map": "/GroupChat/static/js/2.36448991.chunk.js.map",
     "index.html": "/GroupChat/index.html",
-    "precache-manifest.acd81beda90a366474159d3b83d59917.js": "/GroupChat/precache-manifest.acd81beda90a366474159d3b83d59917.js",
+    "precache-manifest.525fcce5a89688139f45ba338699ea81.js": "/GroupChat/precache-manifest.525fcce5a89688139f45ba338699ea81.js",
     "service-worker.js": "/GroupChat/service-worker.js",
-    "static/css/main.27f2699c.chunk.css.map": "/GroupChat/static/css/main.27f2699c.chunk.css.map",
+    "static/css/main.e55f512c.chunk.css.map": "/GroupChat/static/css/main.e55f512c.chunk.css.map",
     "static/js/2.36448991.chunk.js.LICENSE": "/GroupChat/static/js/2.36448991.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.b9086f56.js",
     "static/js/2.36448991.chunk.js",
-    "static/css/main.27f2699c.chunk.css",
+    "static/css/main.e55f512c.chunk.css",
     "static/js/main.4769dc9c.chunk.js"
   ]
 }
