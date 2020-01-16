@@ -1,9 +1,3 @@
-import { socket } from "../client_socket";
-
-export const sendMessage = message => {
-  socket.emit("subscribeMessage", message);
-};
-
 export const signIn = userDetails => {
   return {
     type: "SIGN_IN",
@@ -28,5 +22,12 @@ export const updateUsersList = currentUsersList => {
   return {
     type: "UPDATE_USERS_LIST",
     payload: currentUsersList
+  };
+};
+
+export const setCurrentSocket = socket => {
+  return {
+    type: "SET_SOCKET",
+    payload: socket
   };
 };

@@ -1,7 +1,7 @@
 .sideBar {
     list-style-type: none;
     padding: 0 !important;
-    width: 30%;
+    width: 30vw;
     height: 100%;
     overflow-y: auto;
 }
@@ -15,12 +15,13 @@
 }
 
 .logged-usr:hover {
-    background: #3ae7d9;
+    background: #bac439;
 }
 
 .youspan {
     color: black;
     font-weight: bold;
+    background: #3ae7d9;
 }
 
 .header {

@@ -2,24 +2,24 @@ import "../styles/SideBar.css";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { updateUsersList } from "../actions";
-import { socket } from "../client_socket";
 
-const SideBar = ({ userList, updateUsersList }) => {
+const SideBar = ({ userList, updateUsersList, socket }) => {
   useEffect(() => {
-    socket.on("userListHasChanged", loggedUsers => {
-      console.log(loggedUsers);
-      updateUsersList(loggedUsers);
-    });
-  }, [updateUsersList]);
+    if (socket !== "") {
+      socket.on("userListHasChanged", loggedUsers => {
+        updateUsersList(loggedUsers);
+      });
+    }
+  }, [updateUsersList, socket]);
 
   const renderUserList = () => {
     return userList.map(user => {
       return (
-        <button key={user.userid} className="logged-usr">
-          <span className="youspan">
-            {socket.id === user.userid ? "You:" : ""}{" "}
-          </span>
-          Guest {user.username}
+        <button
+          key={user.userid}
+          className={`${socket.id === user.userid ? "youspan" : ""} logged-usr`}
+        >
+          {socket.id === user.userid ? "You:" : ""} Guest {user.username}
         </button>
       );
     });
@@ -35,7 +35,8 @@ const SideBar = ({ userList, updateUsersList }) => {
 
 const mapStateToProps = state => {
   return {
-    userList: [...state.connectionReducer.usersConnectedList]
+    userList: [...state.connectionReducer.usersConnectedList],
+    socket: state.currentSocket.socket
   };
 };
 export default connect(

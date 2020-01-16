@@ -1,9 +1,11 @@
 import "../styles/TextArea.css";
 import React from "react";
 import { connect } from "react-redux";
-import { sendMessage } from "../actions";
 
-const TextArea = ({ auth }) => {
+const TextArea = ({ auth, socket }) => {
+  const sendMessage = message => {
+    socket.emit("subscribeMessage", message);
+  };
   const onSubmit = event => {
     if (event.key === "Enter") {
       const message = {
@@ -29,6 +31,6 @@ const TextArea = ({ auth }) => {
   );
 };
 const mapStateToProps = state => {
-  return { auth: state.authReducer };
+  return { auth: state.authReducer, socket: state.currentSocket.socket };
 };
 export default connect(mapStateToProps)(TextArea);
