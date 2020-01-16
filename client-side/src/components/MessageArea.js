@@ -2,15 +2,14 @@ import "../styles/MessageArea.css";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { recieveMessage } from "../actions";
+import { socket } from "../client_socket";
 import Comment from "./Comment";
 import SideBar from "./SideBar";
 
-const MessageArea = ({ recieveMessage, messages, socket }) => {
+const MessageArea = ({ recieveMessage, messages }) => {
   useEffect(() => {
-    if (socket !== "") {
-      socket.on("viewMessage", message => recieveMessage(message));
-    }
-  }, [recieveMessage, socket]);
+    socket.on("viewMessage", message => recieveMessage(message));
+  }, [recieveMessage]);
 
   const renderComments = () => {
     return messages.map((message, ind) => {
@@ -40,8 +39,7 @@ const MessageArea = ({ recieveMessage, messages, socket }) => {
 
 const mapStateToProps = state => {
   return {
-    messages: [...state.messageReducer.messages],
-    socket: state.currentSocket.socket
+    messages: [...state.messageReducer.messages]
   };
 };
 export default connect(

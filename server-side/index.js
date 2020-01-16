@@ -1,13 +1,15 @@
 const {
   addClientToUserList,
-  deleteClientFromUserList,
-  loggedUsers
+  deleteClientFromUserList
 } = require("./ListFunctions");
 const io = require("socket.io")();
+var loggedUsers = [];
 
 io.on("connection", client => {
   let userId = client.id;
-  addClientToUserList(userId);
+  console.log(loggedUsers, "dis");
+  addClientToUserList(loggedUsers, userId);
+  console.log(loggedUsers, "con");
 
   console.log("a user connected");
   io.emit("userListHasChanged", loggedUsers);
@@ -22,11 +24,12 @@ io.on("connection", client => {
 
   client.on("disconnect", () => {
     console.log("user disconnected");
-    deleteClientFromUserList(userId);
+    loggedUsers = deleteClientFromUserList(loggedUsers, userId);
+    console.log(loggedUsers, "dis");
     io.emit("userListHasChanged", loggedUsers);
   });
 });
 
-const port = process.env.PORT || 8000;
+const port = /*process.env.PORT ||*/ 8000;
 io.listen(port);
 console.log("listening on port ", port);

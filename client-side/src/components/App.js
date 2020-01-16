@@ -1,20 +1,10 @@
 import "../styles/App.css";
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { setCurrentSocket } from "../actions";
+import React from "react";
 import MessageArea from "./MessageArea";
 import TextArea from "./TextArea";
 import GoogleAuth from "./GoogleAuth";
-import openSocket from "socket.io-client";
 
-const App = ({ setCurrentSocket }) => {
-  useEffect(() => {
-    const socket = openSocket("wss://chatsocket490.herokuapp.com");
-    setCurrentSocket(socket);
-    return () => {
-      socket.disconnect();
-    };
-  }, [setCurrentSocket]);
+const App = () => {
   return (
     <div className="ui container">
       <div className="ui chat">
@@ -28,8 +18,4 @@ const App = ({ setCurrentSocket }) => {
     </div>
   );
 };
-
-export default connect(
-  null,
-  { setCurrentSocket }
-)(App);
+export default App;

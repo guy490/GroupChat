@@ -1,6 +1,4 @@
-let loggedUsers = [];
-
-const addClientToUserList = loggedInUserId => {
+const addClientToUserList = (loggedUsers, loggedInUserId) => {
   let username = "";
   loggedInUserId.split("").forEach((char, ind) => {
     if (ind % 4 == 0) {
@@ -11,9 +9,12 @@ const addClientToUserList = loggedInUserId => {
   loggedUsers.push(currentUserDetails);
 };
 
-const deleteClientFromUserList = loggedInUserId => {
-  let index = loggedUsers.indexOf(loggedInUserId);
-  loggedUsers.splice(index, 1);
+const deleteClientFromUserList = (loggedUsers, loggedInUserId) => {
+  let index = loggedUsers.findIndex(user => user.userid === loggedInUserId);
+  return [
+    ...loggedUsers.slice(0, index),
+    ...loggedUsers.slice(index + 1, loggedUsers.length)
+  ];
 };
 
-module.exports = { addClientToUserList, deleteClientFromUserList, loggedUsers };
+module.exports = { addClientToUserList, deleteClientFromUserList };

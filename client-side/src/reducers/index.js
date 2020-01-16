@@ -33,16 +33,8 @@ const authReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-const currentSocket = (state = { socket: "" }, action) => {
-  if (action.type === "SET_SOCKET") {
-    return { ...state, socket: action.payload };
-  }
-  return state;
-};
-
 export default combineReducers({
   messageReducer,
   authReducer,
-  connectionReducer,
-  currentSocket
+  connectionReducer
 });

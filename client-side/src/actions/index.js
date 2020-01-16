@@ -24,10 +24,3 @@ export const updateUsersList = currentUsersList => {
     payload: currentUsersList
   };
 };
-
-export const setCurrentSocket = socket => {
-  return {
-    type: "SET_SOCKET",
-    payload: socket
-  };
-};

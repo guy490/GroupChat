@@ -2,17 +2,17 @@ import "../styles/SideBar.css";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { updateUsersList } from "../actions";
+import { socket } from "../client_socket";
 
-const SideBar = ({ userList, updateUsersList, socket }) => {
+const SideBar = ({ userList, updateUsersList }) => {
   useEffect(() => {
-    if (socket !== "") {
-      socket.on("userListHasChanged", loggedUsers => {
-        updateUsersList(loggedUsers);
-      });
-    }
-  }, [updateUsersList, socket]);
+    socket.on("userListHasChanged", loggedUsers => {
+      updateUsersList(loggedUsers);
+    });
+  }, [updateUsersList]);
 
   const renderUserList = () => {
+    console.log(socket.id);
     return userList.map(user => {
       return (
         <button
@@ -35,8 +35,7 @@ const SideBar = ({ userList, updateUsersList, socket }) => {
 
 const mapStateToProps = state => {
   return {
-    userList: [...state.connectionReducer.usersConnectedList],
-    socket: state.currentSocket.socket
+    userList: [...state.connectionReducer.usersConnectedList]
   };
 };
 export default connect(

@@ -1,8 +1,9 @@
 import "../styles/TextArea.css";
 import React from "react";
+import { socket } from "../client_socket";
 import { connect } from "react-redux";
 
-const TextArea = ({ auth, socket }) => {
+const TextArea = ({ auth }) => {
   const sendMessage = message => {
     socket.emit("subscribeMessage", message);
   };
@@ -31,6 +32,6 @@ const TextArea = ({ auth, socket }) => {
   );
 };
 const mapStateToProps = state => {
-  return { auth: state.authReducer, socket: state.currentSocket.socket };
+  return { auth: state.authReducer };
 };
 export default connect(mapStateToProps)(TextArea);
