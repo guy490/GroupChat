@@ -12,7 +12,6 @@ const SideBar = ({ userList, updateUsersList }) => {
   }, [updateUsersList]);
 
   const renderUserList = () => {
-    console.log(socket.id);
     return userList.map(user => {
       return (
         <button
