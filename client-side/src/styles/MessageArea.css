@@ -1,25 +1,45 @@
-.chat-view {
+.top-view {
     display: flex;
-    height: 15em;
+    height: 100%;
 }
 
-.comments {
-    overflow-y: auto;
-    width: 70vw;
+.side-bar-view {
+    width: 20%;
+    transition: 1s;
 }
 
-.segment {
-    margin-top: 0 !important;
+.chat-view {
+    /* height: 100%; */
+    width: 80%;
+    margin-left: 5px;
+}
+
+.open-side-bar {
+    display: none;
+}
+
+.hidden {
+    display: none !important;
 }
 
 @media only screen and (max-width: 767px) {
-    .comments.segment {
-        width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+    .side-bar-view {
+        width: 0;
+        visibility: hidden;
     }
-    /* .container.chat {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    } */
+    .chat-view {
+        margin-left: auto;
+        width: 100%;
+    }
+    .open-side-bar {
+        display: inline;
+        top: 20%;
+        position: absolute;
+        font-size: x-large;
+        z-index: 1;
+    }
+    .icon.angle,
+    .icon.clipboard {
+        display: block;
+    }
 }

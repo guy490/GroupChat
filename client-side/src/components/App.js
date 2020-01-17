@@ -9,10 +9,18 @@ const App = () => {
     <div className="ui container">
       <div className="ui chat">
         <div className="ui placeholder segment">
-          <MessageArea />
+          <div className="head-view">
+            <MessageArea />
+          </div>
           <div className="ui divider"></div>
-          <TextArea />
-          <GoogleAuth />
+          <div className="buttom-view">
+            <div className="text-area">
+              <TextArea />
+            </div>
+            <div className="google-auth-area">
+              <GoogleAuth />
+            </div>
+          </div>
         </div>
       </div>
     </div>

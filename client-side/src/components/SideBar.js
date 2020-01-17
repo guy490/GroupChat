@@ -25,7 +25,7 @@ const SideBar = ({ userList, updateUsersList }) => {
   };
 
   return (
-    <div className="ui sideBar segment">
+    <div className="ui side-bar segment">
       <button className="header">Users in chat:</button>
       {renderUserList()}
     </div>
@@ -37,7 +37,4 @@ const mapStateToProps = state => {
     userList: [...state.connectionReducer.usersConnectedList]
   };
 };
-export default connect(
-  mapStateToProps,
-  { updateUsersList }
-)(SideBar);
+export default connect(mapStateToProps, { updateUsersList })(SideBar);

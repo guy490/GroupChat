@@ -1,7 +1,6 @@
-.sideBar {
+.side-bar {
     list-style-type: none;
     padding: 0 !important;
-    width: 30vw;
     height: 100%;
     overflow-y: auto;
 }

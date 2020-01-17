@@ -1,59 +1,46 @@
 import "../styles/MessageArea.css";
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { recieveMessage } from "../actions";
-import { socket } from "../client_socket";
-import Comment from "./Comment";
+import React, { useRef } from "react";
 import SideBar from "./SideBar";
+import Chat from "./Chat";
 
-const MessageArea = ({ recieveMessage, messages }) => {
-  useEffect(() => {
-    socket.on("viewMessage", message => recieveMessage(message));
-  }, [recieveMessage]);
+const MessageArea = () => {
+  const sideBarRef = useRef(null);
+  const toggleRef = useRef(null);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  const toggleSideBar = (sideBarRef, toggleRef) => {
+    const leftIcon = toggleRef.current.querySelector(".left");
+    const rightIcon = toggleRef.current.querySelector(".right");
 
-  const scrollToBottom = () => {
-    let scrollingElement = document.querySelector(".comments");
-    if (scrollingElement !== null) {
-      scrollingElement.scrollTop = scrollingElement.scrollHeight;
+    if (!sideBarRef.current.style.width) {
+      sideBarRef.current.style.visibility = "visible";
+      sideBarRef.current.style.width = "50%";
+    } else {
+      sideBarRef.current.style.width = null;
+      sideBarRef.current.style.visibility = "hidden";
     }
-  };
 
-  const renderComments = () => {
-    return messages.map((message, ind) => {
-      if (typeof message === "string") {
-        return <Comment key={ind} name={""} date={new Date()} text={message} />;
-      }
-      return (
-        <Comment
-          key={ind}
-          name={message.senderName}
-          date={new Date(message.date)}
-          text={message.text}
-          image={message.image}
-        />
-      );
-    });
+    leftIcon.classList.toggle("hidden");
+    rightIcon.classList.toggle("hidden");
   };
   return (
-    <div className="ui chat-view">
-      <SideBar />
-      <div className="ui fluid comments segment container">
-        {renderComments()}
+    <div className="ui top-view">
+      <div ref={sideBarRef} className="side-bar-view">
+        <SideBar />
+      </div>
+      <div className="chat-view">
+        <div
+          ref={toggleRef}
+          className="open-side-bar"
+          onClick={() => toggleSideBar(sideBarRef, toggleRef)}
+        >
+          <i className="angle double right icon"></i>
+          <i className="angle double left icon hidden"></i>
+          <i className="clipboard list icon"></i>
+        </div>
+        <Chat />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    messages: [...state.messageReducer.messages]
-  };
-};
-export default connect(
-  mapStateToProps,
-  { recieveMessage }
-)(MessageArea);
+export default MessageArea;
