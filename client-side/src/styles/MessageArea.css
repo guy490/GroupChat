@@ -6,6 +6,7 @@
 .side-bar-view {
     width: 20%;
     transition: 1s;
+    -webkit-transition: 1s;
 }
 
 .chat-view {
@@ -28,7 +29,7 @@
         visibility: hidden;
     }
     .chat-view {
-        margin-left: auto;
+        margin-left: 0;
         width: 100%;
     }
     .open-side-bar {
