@@ -21,6 +21,7 @@ const MessageArea = () => {
     leftIcon.classList.toggle("hidden");
     rightIcon.classList.toggle("hidden");
   };
+
   return (
     <div className="ui top-view">
       <div ref={sideBarRef} className="side-bar-view">

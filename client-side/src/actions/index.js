@@ -5,9 +5,10 @@ export const signIn = userDetails => {
   };
 };
 
-export const signOut = () => {
+export const signAsGuest = guestDetails => {
   return {
-    type: "SIGN_OUT"
+    type: "SIGN_AS_GUEST",
+    payload: guestDetails
   };
 };
 

@@ -1,8 +1,7 @@
 import { combineReducers } from "redux";
 
 const INITIAL_STATE = {
-  isSignedIn: null,
-  userId: null
+  isSignedIn: null
 };
 
 const messageReducer = (state = { messages: [] }, action) => {
@@ -12,22 +11,22 @@ const messageReducer = (state = { messages: [] }, action) => {
   return state;
 };
 
-const connectionReducer = (state = { usersConnectedList: [] }, action) => {
+const userListReducer = (state = { usersList: [] }, action) => {
   if (action.type === "UPDATE_USERS_LIST") {
     return {
       ...state,
-      usersConnectedList: [...action.payload]
+      usersList: [...action.payload]
     };
   }
   return state;
 };
 
-const authReducer = (state = INITIAL_STATE, action) => {
+const profileReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "SIGN_IN":
-      return { ...state, isSignedIn: true, userDetails: action.payload };
-    case "SIGN_OUT":
-      return { ...state, isSignedIn: false, userDetails: null };
+      return { ...state, isSignedIn: true, ...action.payload };
+    case "SIGN_AS_GUEST":
+      return { ...state, isSignedIn: false, ...action.payload };
     default:
       return state;
   }
@@ -35,6 +34,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
 
 export default combineReducers({
   messageReducer,
-  authReducer,
-  connectionReducer
+  profileReducer,
+  userListReducer
 });

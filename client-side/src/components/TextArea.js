@@ -3,17 +3,17 @@ import React from "react";
 import { socket } from "../client_socket";
 import { connect } from "react-redux";
 
-const TextArea = ({ auth }) => {
+const TextArea = ({ userProfile }) => {
   const sendMessage = message => {
     socket.emit("subscribeMessage", message);
   };
   const onSubmit = event => {
     if (event.key === "Enter") {
       const message = {
-        senderName: auth.userDetails ? auth.userDetails.getName() : "Guest",
+        senderName: userProfile.username,
         date: new Date(),
         text: event.target.value,
-        image: auth.userDetails ? auth.userDetails.getImageUrl() : ""
+        image: userProfile.imgURL
       };
       event.target.value = "";
       sendMessage(message);
@@ -32,6 +32,6 @@ const TextArea = ({ auth }) => {
   );
 };
 const mapStateToProps = state => {
-  return { auth: state.authReducer };
+  return { userProfile: state.profileReducer };
 };
 export default connect(mapStateToProps)(TextArea);

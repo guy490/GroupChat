@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { signIn, signOut } from "../actions";
+import { signIn, signAsGuest } from "../actions";
+import { createGuestUserProfile, createGoogleUserProfile } from "./UserProfile";
+import { socket } from "../client_socket";
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -18,12 +20,19 @@ class GoogleAuth extends React.Component {
         });
     });
   }
+
   onAuthChange = isSignedIn => {
+    let userProfile;
     if (isSignedIn) {
-      this.props.signIn(this.auth.currentUser.get().getBasicProfile());
+      userProfile = createGoogleUserProfile(
+        this.auth.currentUser.get().getBasicProfile()
+      );
+      this.props.signIn(userProfile);
     } else {
-      this.props.signOut();
+      userProfile = createGuestUserProfile(socket.id);
+      this.props.signAsGuest(userProfile);
     }
+    socket.emit("userconnected", this.props.userProfile);
   };
 
   onSignInClick = () => {
@@ -34,9 +43,9 @@ class GoogleAuth extends React.Component {
     this.auth.signOut();
   };
   renderAuthButton() {
-    if (this.props.isSignedIn === null) {
+    if (this.props.userProfile.isSignedIn === null) {
       return <span>There is some problem with the API</span>;
-    } else if (this.props.isSignedIn) {
+    } else if (this.props.userProfile.isSignedIn) {
       return (
         <button onClick={this.onSignOutClick} className="ui red google button">
           <i className="google icon" />
@@ -60,9 +69,7 @@ class GoogleAuth extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { isSignedIn: state.authReducer.isSignedIn };
+  // console.log(state.profileReducer.userDetails.getId());
+  return { userProfile: state.profileReducer };
 };
-export default connect(
-  mapStateToProps,
-  { signIn, signOut }
-)(GoogleAuth);
+export default connect(mapStateToProps, { signIn, signAsGuest })(GoogleAuth);

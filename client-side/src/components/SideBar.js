@@ -11,14 +11,18 @@ const SideBar = ({ userList, updateUsersList }) => {
     });
   }, [updateUsersList]);
 
+  const createButtonClass = user => {
+    const isCurrentUser = socket.id === user.socketID;
+    const buttonClass = `${isCurrentUser ? "youspan" : ""} logged-usr`;
+    return buttonClass;
+  };
+
   const renderUserList = () => {
     return userList.map(user => {
+      const buttonClass = createButtonClass(user);
       return (
-        <button
-          key={user.userid}
-          className={`${socket.id === user.userid ? "youspan" : ""} logged-usr`}
-        >
-          {socket.id === user.userid ? "You:" : ""} Guest {user.username}
+        <button key={user.id} className={buttonClass}>
+          {user.username}
         </button>
       );
     });
@@ -32,9 +36,9 @@ const SideBar = ({ userList, updateUsersList }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ userListReducer }) => {
   return {
-    userList: [...state.connectionReducer.usersConnectedList]
+    userList: [...userListReducer.usersList]
   };
 };
 export default connect(mapStateToProps, { updateUsersList })(SideBar);
