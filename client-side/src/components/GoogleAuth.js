@@ -33,8 +33,13 @@ class GoogleAuth extends React.Component {
         this.auth.currentUser.get().getBasicProfile()
       );
       this.props.signIn(userProfile);
-      socket.emit("userconnected", this.props.userProfile);
+    } else {
+      const userProfile = createGuestUserProfile(
+        this.props.userProfile.socketID
+      );
+      this.props.signAsGuest(userProfile);
     }
+    socket.emit("userconnected", this.props.userProfile);
   };
 
   onSignInClick = () => {
