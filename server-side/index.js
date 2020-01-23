@@ -13,23 +13,16 @@ io.on("connection", client => {
     console.log(loggedUsers, "con");
     console.log("a user connected");
     io.emit("userListHasChanged", loggedUsers);
+    client.on("disconnect", () => {
+      console.log("user disconnected");
+      loggedUsers = deleteClientFromUserList(loggedUsers, userSocketID);
+      console.log(loggedUsers, "dis");
+      io.emit("userListHasChanged", loggedUsers);
+    });
   });
-
   client.on("subscribeMessage", message => {
     console.log(message);
     io.emit("viewMessage", message);
-  });
-
-  client.on("authChange", credentials => {
-    console.log(credentials);
-    io.emit("viewLoginChange", credentials);
-  });
-
-  client.on("disconnect", () => {
-    console.log("user disconnected");
-    loggedUsers = deleteClientFromUserList(loggedUsers, userSocketID);
-    console.log(loggedUsers, "dis");
-    io.emit("userListHasChanged", loggedUsers);
   });
 });
 

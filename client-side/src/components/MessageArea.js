@@ -12,7 +12,7 @@ const MessageArea = () => {
     const rightIcon = toggleRef.current.querySelector(".right");
     if (!sideBarRef.current.style.width) {
       sideBarRef.current.style.visibility = "visible";
-      sideBarRef.current.style.width = "20%";
+      sideBarRef.current.style.width = "40%";
     } else {
       sideBarRef.current.style.width = null;
       sideBarRef.current.style.visibility = null;
