@@ -6,23 +6,23 @@ import { socket } from "../client_socket";
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
-    window.gapi.load("client:auth2", () => {
-      window.gapi.client
-        .init({
-          clientId:
-            "548027089353-j03e14pvp4o81noalqup4e212iscpqlb.apps.googleusercontent.com",
-          scope: "email profile"
-        })
-        .then(() => {
-          this.auth = window.gapi.auth2.getAuthInstance();
-          this.onAuthChange(this.auth.isSignedIn.get());
-          this.auth.isSignedIn.listen(this.onAuthChange);
-        });
-    });
     socket.on("connect", () => {
+      window.gapi.load("client:auth2", () => {
+        window.gapi.client
+          .init({
+            clientId:
+              "548027089353-j03e14pvp4o81noalqup4e212iscpqlb.apps.googleusercontent.com",
+            scope: "email profile"
+          })
+          .then(() => {
+            this.auth = window.gapi.auth2.getAuthInstance();
+            this.onAuthChange(this.auth.isSignedIn.get());
+            this.auth.isSignedIn.listen(this.onAuthChange);
+          });
+      });
       const userProfile = createGuestUserProfile(socket.id);
       this.props.signAsGuest(userProfile);
-      socket.emit("userconnected", this.props.userProfile);
+      socket.emit("profileCreated", this.props.userProfile);
     });
   }
 
@@ -39,7 +39,7 @@ class GoogleAuth extends React.Component {
       );
       this.props.signAsGuest(userProfile);
     }
-    socket.emit("userconnected", this.props.userProfile);
+    socket.emit("profileCreated", this.props.userProfile);
   };
 
   onSignInClick = () => {

@@ -7,7 +7,7 @@ var loggedUsers = [];
 
 io.on("connection", client => {
   let userSocketID = client.id;
-  client.on("userconnected", userProfile => {
+  client.on("profileCreated", userProfile => {
     console.log(loggedUsers, "dis");
     addClientToUserList(loggedUsers, userProfile);
     console.log(loggedUsers, "con");
