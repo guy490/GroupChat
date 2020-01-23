@@ -19,6 +19,11 @@ class GoogleAuth extends React.Component {
           this.auth.isSignedIn.listen(this.onAuthChange);
         });
     });
+    socket.on("connect", () => {
+      const userProfile = createGuestUserProfile(socket.id);
+      this.props.signAsGuest(userProfile);
+      socket.emit("userconnected", this.props.userProfile);
+    });
   }
 
   onAuthChange = isSignedIn => {
@@ -28,11 +33,8 @@ class GoogleAuth extends React.Component {
         this.auth.currentUser.get().getBasicProfile()
       );
       this.props.signIn(userProfile);
-    } else {
-      userProfile = createGuestUserProfile(socket.id);
-      this.props.signAsGuest(userProfile);
+      socket.emit("userconnected", this.props.userProfile);
     }
-    socket.emit("userconnected", this.props.userProfile);
   };
 
   onSignInClick = () => {
