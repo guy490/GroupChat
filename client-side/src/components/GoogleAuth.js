@@ -7,6 +7,8 @@ import { socket } from "../client_socket";
 class GoogleAuth extends React.Component {
   componentDidMount() {
     socket.on("connect", () => {
+      const userProfile = createGuestUserProfile(socket.id);
+
       window.gapi.load("client:auth2", () => {
         window.gapi.client
           .init({
@@ -16,13 +18,11 @@ class GoogleAuth extends React.Component {
           })
           .then(() => {
             this.auth = window.gapi.auth2.getAuthInstance();
+            this.props.signAsGuest(userProfile);
             this.onAuthChange(this.auth.isSignedIn.get());
             this.auth.isSignedIn.listen(this.onAuthChange);
           });
       });
-      const userProfile = createGuestUserProfile(socket.id);
-      this.props.signAsGuest(userProfile);
-      socket.emit("profileCreated", this.props.userProfile);
     });
   }
 
