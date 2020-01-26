@@ -27,18 +27,17 @@ class GoogleAuth extends React.Component {
   }
 
   onAuthChange = isSignedIn => {
-    let userProfile;
+    let userProfile = null;
     if (isSignedIn) {
       userProfile = createGoogleUserProfile(
         this.auth.currentUser.get().getBasicProfile()
       );
       this.props.signIn(userProfile);
     } else {
-      const userProfile = createGuestUserProfile(
-        this.props.userProfile.socketID
-      );
+      userProfile = createGuestUserProfile(this.props.userProfile.socketID);
       this.props.signAsGuest(userProfile);
     }
+
     socket.emit("profileCreated", this.props.userProfile);
   };
 
