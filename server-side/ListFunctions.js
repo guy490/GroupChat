@@ -1,7 +1,7 @@
 const addClientToUserList = (loggedUsers, userProfile) => {
-  let index = loggedUsers.findIndex(
-    user => user.socketID === userProfile.socketID
-  );
+  let index = loggedUsers.findIndex(user => {
+    return user.socketID === userProfile.socketID;
+  });
   if (index === -1) {
     loggedUsers.push(userProfile);
   } else {

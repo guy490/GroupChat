@@ -76,7 +76,6 @@ class GoogleAuth extends React.Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state.profileReducer.userDetails.getId());
   return { userProfile: state.profileReducer };
 };
 export default connect(mapStateToProps, { signIn, signAsGuest })(GoogleAuth);

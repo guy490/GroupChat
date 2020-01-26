@@ -1,10 +1,12 @@
 import "../styles/App.css";
-import React from "react";
+import React, { useEffect } from "react";
 import MessageArea from "./MessageArea";
 import TextArea from "./TextArea";
 import GoogleAuth from "./GoogleAuth";
+import { socket } from "../client_socket";
 
 const App = () => {
+  useEffect(() => () => socket.emit("disconnect"), []);
   return (
     <div className="ui container">
       <div className="ui chat">
