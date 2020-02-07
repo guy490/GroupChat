@@ -3,9 +3,11 @@ import React from "react";
 import { socket } from "../client_socket";
 import { connect } from "react-redux";
 
-const TextArea = ({ userProfile }) => {
+const TextArea = ({ userProfile, privateChat }) => {
   const sendMessage = message => {
-    socket.emit("subscribeMessage", message);
+    if (!privateChat) {
+      socket.emit("subscribeMessage", message);
+    }
   };
   const onSubmit = event => {
     if (event.key === "Enter") {

@@ -1,8 +1,11 @@
 import "../styles/SideBar.css";
-import React, { useEffect } from "react";
+import "../styles/ResizableModal.css";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { updateUsersList } from "../actions";
 import { socket } from "../client_socket";
+import App from "./App";
+import Modal from "react-modal-resizable-draggable";
 
 const SideBar = ({ userList, updateUsersList }) => {
   useEffect(() => {
@@ -10,6 +13,28 @@ const SideBar = ({ userList, updateUsersList }) => {
       updateUsersList(loggedUsers);
     });
   }, [updateUsersList]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+  const chatModal = () => {
+    return (
+      <Modal
+        initWidth={800}
+        initHeight={400}
+        onFocus={() => console.log("Modal is clicked")}
+        className={"my-modal-custom-class"}
+        onRequestClose={closeModal}
+        isOpen={modalIsOpen}
+      >
+        <App privateChat={true} />
+        <button onClick={closeModal}>Close modal</button>
+      </Modal>
+    );
+  };
 
   const createButtonClass = user => {
     const isCurrentUser = socket.id === user.socketID;
@@ -21,7 +46,7 @@ const SideBar = ({ userList, updateUsersList }) => {
     return userList.map(user => {
       const buttonClass = createButtonClass(user);
       return (
-        <button key={user.id} className={buttonClass}>
+        <button key={user.id} className={buttonClass} onClick={openModal}>
           {user.username}
         </button>
       );
@@ -32,6 +57,7 @@ const SideBar = ({ userList, updateUsersList }) => {
     <div className="ui side-bar segment">
       <button className="header">Users in chat:</button>
       {renderUserList()}
+      {chatModal()}
     </div>
   );
 };

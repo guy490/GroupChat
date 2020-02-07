@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import SideBar from "./SideBar";
 import Chat from "./Chat";
 
-const MessageArea = () => {
+const MessageArea = ({ privateChat }) => {
   const sideBarRef = useRef(null);
   const toggleRef = useRef(null);
 
@@ -24,9 +24,11 @@ const MessageArea = () => {
 
   return (
     <div className="ui top-view">
-      <div ref={sideBarRef} className="side-bar-view">
-        <SideBar />
-      </div>
+      {!privateChat ? (
+        <div ref={sideBarRef} className="side-bar-view">
+          <SideBar />
+        </div>
+      ) : null}
       <div className="chat-view">
         <div
           ref={toggleRef}
@@ -37,7 +39,7 @@ const MessageArea = () => {
           <i className="angle double left icon hidden"></i>
           <i className="clipboard list icon"></i>
         </div>
-        <Chat />
+        <Chat private={privateChat} />
       </div>
     </div>
   );

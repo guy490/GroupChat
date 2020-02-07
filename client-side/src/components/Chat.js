@@ -5,10 +5,12 @@ import { recieveMessage } from "../actions";
 import { socket } from "../client_socket";
 import Comment from "./Comment";
 
-const Chat = ({ recieveMessage, messages }) => {
+const Chat = ({ recieveMessage, messages, privateChat }) => {
   useEffect(() => {
-    socket.on("viewMessage", message => recieveMessage(message));
-  }, [recieveMessage]);
+    if (!privateChat) {
+      socket.on("viewMessage", message => recieveMessage(message));
+    }
+  }, [recieveMessage, privateChat]);
 
   useEffect(() => {
     scrollToBottom();
