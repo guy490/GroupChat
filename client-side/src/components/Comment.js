@@ -1,42 +1,67 @@
 import "../styles/Comment.css";
 import React from "react";
 
-const Comment = props => {
+const Comment = ({ messageDate, image, name, text, mediaContent }) => {
   const date =
-    props.date.getDate() +
+    messageDate.getDate() +
     "/" +
-    (props.date.getMonth() + 1) +
+    (messageDate.getMonth() + 1) +
     "/" +
-    props.date.getFullYear() +
+    messageDate.getFullYear() +
     " @ " +
-    props.date.getHours() +
+    messageDate.getHours() +
     ":" +
-    props.date.getMinutes() +
+    messageDate.getMinutes() +
     ":" +
-    props.date.getSeconds();
+    messageDate.getSeconds();
 
   const renderAvatar = () => {
-    if (props.image === "") {
+    if (image === "") {
       return null;
     }
     return (
       <div className="avatar">
-        <img src={props.image} alt="" />
+        <img src={image} alt="" />
       </div>
     );
+  };
+
+  const getMediaContentAsURL = (mediaContent) => {
+    var blob = new Blob([mediaContent], { type: "image/jpeg" });
+    var urlCreator = window.URL || window.webkitURL;
+    var imageUrl = urlCreator.createObjectURL(blob);
+    return imageUrl;
   };
   return (
     <div className="comment">
       <div className="content">
         {renderAvatar()}
         <a className="author" href="www.walla.com">
-          {props.name}
+          {name}
         </a>
         <div className="metadata">
           <div>{date}</div>
         </div>
         <div className="text">
-          <p>{props.text}</p>
+          <p>{text}</p>
+
+          {mediaContent !== null ? (
+            <p>
+              <img
+                alt="Media Content"
+                height="100"
+                width="100"
+                src={getMediaContentAsURL(mediaContent)}
+              ></img>
+              <a
+                className="ui button green"
+                href={getMediaContentAsURL(mediaContent)}
+                download
+              >
+                Download
+              </a>
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

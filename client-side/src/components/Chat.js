@@ -8,7 +8,7 @@ import Comment from "./Comment";
 const Chat = ({ recieveMessage, messages, privateChat }) => {
   useEffect(() => {
     if (!privateChat) {
-      socket.on("viewMessage", message => recieveMessage(message));
+      socket.on("viewMessage", (message) => recieveMessage(message));
     }
   }, [recieveMessage, privateChat]);
 
@@ -32,9 +32,10 @@ const Chat = ({ recieveMessage, messages, privateChat }) => {
         <Comment
           key={ind}
           name={message.senderName}
-          date={new Date(message.date)}
+          messageDate={new Date(message.date)}
           text={message.text}
           image={message.image}
+          mediaContent={message.mediaContent}
         />
       );
     });
@@ -45,9 +46,9 @@ const Chat = ({ recieveMessage, messages, privateChat }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    messages: [...state.messageReducer.messages]
+    messages: [...state.messageReducer.messages],
   };
 };
 export default connect(mapStateToProps, { recieveMessage })(Chat);

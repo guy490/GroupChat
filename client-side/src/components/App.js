@@ -7,6 +7,7 @@ import { socket } from "../client_socket";
 
 const App = ({ privateChat }) => {
   useEffect(() => () => socket.emit("disconnect"), []);
+
   return (
     <div className="ui container">
       <div className="ui chat">
@@ -19,8 +20,10 @@ const App = ({ privateChat }) => {
             <div className="text-area">
               <TextArea privateChat={privateChat} />
             </div>
+            {/* <i className="icon camera"></i> */}
             {!privateChat ? (
               <div className="google-auth-area">
+                <br />
                 <GoogleAuth />
               </div>
             ) : null}
